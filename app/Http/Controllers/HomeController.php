@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TABGER01;
+use App\TABGER02;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,11 @@ class HomeController extends Controller
     public function index()
     {
         //var_dump("abcdef");
-        $tabger01 = TABGER01::all();
+        $tabger01 = TABGER01::orderBy('TabGer01Cod')->get();
+        $tabger02 = TABGER02::orderBy('TabGer02Orden')->get();
+
+        //$presupuestdatos = TABGER02::avg('star');
+
         $arr = [];
         $plan = [];
         $culm = [];
@@ -92,6 +97,42 @@ class HomeController extends Controller
                 'data' => $ejec,
             ],
          
+        ])
+        ->options([]);
+
+        $chartjs_presupuesto = app()->chartjs
+        ->name('presupuesto')
+        ->type('bar')
+        //->size(['width' => 400, 'height' => 200])
+        ->labels(['Presup. Vigente 2018','Plan Financiero 2018','Obligado'])
+        //->labels($arr)
+        ->datasets([
+            [
+                "label" => "Presupuesto Vigente 2018",
+                'backgroundColor' => "blue",
+                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                'data' => [$tabger02->sum('TabGer02Presup'),$tabger02->sum('TabGer02PlanFin'),$tabger02->sum('TabGer02Oblig')],
+            ],
+            
+        ])
+        ->options([]);
+        $obligado= number_format(($tabger02->sum('TabGer02Oblig') * 100) / $tabger02->sum('TabGer02PlanFin'),0,'.','.');
+        $plafin  = number_format((100 - ($tabger02->sum('TabGer02Oblig') * 100) / $tabger02->sum('TabGer02PlanFin')),0,'.','.');
+        $chartjs_presupuestotorta = app()->chartjs
+        ->name('pieChartTest')
+        ->type('pie')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(['Obligado','Plan Financiero'])
+        ->datasets([
+            [
+                'backgroundColor' => ['#FF6384', '#36A2EB'],
+                'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
+                'data' => [$obligado,$plafin]
+            ]
         ])
         ->options([]);
 
@@ -209,6 +250,7 @@ class HomeController extends Controller
         }");
         //->options([]);
 
-        return view('home',compact('tabger01','chartjs','arr','chartjs_resumeneje','chartjs_porcentajeplan'));
+        return view('home',compact('tabger01','tabger02','chartjs','chartjs_presupuestotorta',
+        'arr','chartjs_resumeneje','chartjs_porcentajeplan','chartjs_presupuesto'));
     }
 }
