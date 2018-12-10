@@ -8,7 +8,7 @@
  */
 
 define('LARAVEL_START', microtime(true));
-
+//phpinfo();
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
