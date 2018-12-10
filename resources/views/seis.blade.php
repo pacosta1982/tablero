@@ -86,7 +86,7 @@
                 </tr>
                 @foreach($tabger02 as $tab)  
                     <tr>
-                        <td>{{ $tab->TabGer02PrgPry }}</td>
+                        <td>{{ utf8_encode($tab->TabGer02PrgPry) }}</td>
                         <td class="center">{{ number_format($tab->TabGer02Presup,0,'.','.') }}</td>
                         <td class="center">{{ number_format($tab->TabGer02PlanFin,0,'.','.') }}</td>
                         <td class="center">{{ number_format($tab->TabGer02Oblig,0,'.','.') }}</td>
