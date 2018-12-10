@@ -22,7 +22,7 @@
                 
                     @if(!$loop->last)
                     <tr>
-                        <td>{{ $tab->TabGer01Prog }}</td>
+                        <td>{{ utf8_encode($tab->TabGer01Prog) }}</td>
                         <td class="center">{{ $tab->TabGer01VivPla }}</td>
                         <td class="center">{{ $tab->TabGer01VivCul }}</td>
                         <td class="center">{{ $tab->TabGer01VivIni }}</td>

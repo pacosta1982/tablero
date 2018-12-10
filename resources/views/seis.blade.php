@@ -41,7 +41,7 @@
                 </tr>
                 @foreach($tabger03 as $tabdpto)  
                     <tr>
-                        <td>{{ $tabdpto->TabGer03DptoNom }}</td>
+                        <td>{{ utf8_encode($tabdpto->TabGer03DptoNom) }}</td>
                         <td class="center">{{ number_format($tabdpto->TabGer03VivPla,0,'.','.') }}</td>
                         <td class="center">{{ number_format($tabdpto->TabGer03VivCul,0,'.','.') }}</td>
                         <td class="center">{{ number_format($tabdpto->Tabger03VivEje,0,'.','.') }}</td>

@@ -44,7 +44,7 @@
                 @foreach($tabger01 as $tabavance)
                 @if(!$loop->last)  
                     <tr>
-                        <td>{{ $tabavance->TabGer01Prog }}</td>
+                        <td>{{ utf8_encode($tabavance->TabGer01Prog) }}</td>
                         <td class="center">{{ number_format($tabavance->TabGer01Ava25,0,'.','.') }}</td>
                         <td class="center">{{ number_format($tabavance->TabGer01Ava50,0,'.','.') }}</td>
                         <td class="center">{{ number_format($tabavance->TabGer01Ava75,0,'.','.') }}</td>
