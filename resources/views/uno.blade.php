@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="box box-primary">
           <div class="box-header with-border center">
-            <h3 class="box-title">Presupuesto, Plan Financiero y Obligado en Gs a Oct. 2018</h3>
+            <h3 class="box-title">Resumen de Ejecución de Viviendas 2018</h3>
 
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -12,6 +12,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body" style="">
+              
             {!! $chartjs_resumeneje->render() !!}
           </div>
           <!-- /.box-body -->
@@ -20,8 +21,8 @@
       </div>
       <div class="col-md-6">
         <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Porcent. del Plan Financiero Ejecutado segun Obligado a Oct. 2018</h3>
+          <div class="box-header with-border center">
+            <h3 class="box-title">Porcentaje en relación al Total Planificado</h3>
 
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

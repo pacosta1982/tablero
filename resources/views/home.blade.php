@@ -23,6 +23,10 @@
 
 
 @stop
+
+@section('js')
+<script src="{{asset('js/chartjs-plugin-labels.js')}}"></script>
+@endsection
 @section('css')
    <style>
    .center{

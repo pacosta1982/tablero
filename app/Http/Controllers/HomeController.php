@@ -149,8 +149,23 @@ class HomeController extends Controller
             ],
          
         ])
-        ->options([]);
-
+        //->options([]);
+        ->optionsRaw("{
+            legend: {
+                display:true,
+                position: 'top',
+                labels: {
+                    fontColor:  '#000'
+                }
+            },
+            plugins: {
+                labels: {
+                    render: 'value',
+                    fontSize: 12,
+                },
+            }
+        }");
+  
         $chartjs_presupuesto = app()->chartjs
         ->name('presupuesto')
         ->type('bar')
@@ -170,7 +185,40 @@ class HomeController extends Controller
             ],
             
         ])
-        ->options([]);
+        ->optionsRaw("{
+            legend: {
+                display:true,
+                position: 'bottom',
+                labels: {
+                    fontColor:  '#000'
+                }
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display:false
+                    }  
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display:true
+                    },
+                    ticks: {
+                        beginAtZero: true,
+                        steps: 9,
+                        stepValue: 100000,
+                        max: 900000
+                    } 
+                }]
+            },
+            plugins: {
+                labels: {
+                    render: 'value'
+                },
+            }
+        }");
+        //->options([]);
+
         $obligado= number_format(($tabger02->sum('TabGer02Oblig') * 100) / $tabger02->sum('TabGer02PlanFin'),0,'.','.');
         $plafin  = number_format((100 - ($tabger02->sum('TabGer02Oblig') * 100) / $tabger02->sum('TabGer02PlanFin')),0,'.','.');
         $chartjs_presupuestotorta = app()->chartjs
@@ -185,13 +233,34 @@ class HomeController extends Controller
                 'data' => [$obligado,$plafin]
             ]
         ])
-        ->options([]);
+        ->optionsRaw("{
+            legend: {
+                display:true,
+                position: 'bottom',
+                labels: {
+                    fontColor:  '#000'
+                }
+            },
+            plugins: {
+                labels: [
+                    {
+                      render: 'label',
+                      position: 'outside'
+                    },
+                    {
+                      render: 'percentage'
+                    }
+                  ]
+            }
+            
+        }");
+        //->options([]);
 
         $chartjs_resumeneje = app()->chartjs
         ->name('resumen')
         ->type('bar')
         //->size(['width' => 400, 'height' => 200])
-        //->labels(['Vya Renda', 'Originarios', 'V. Economicas', 'Fonavis', 'Sembrando', 'Foncoop', 'Focen','Che Tapyi', 'Mej. Vivienda'])
+        ->labels(['Total General'])
         //->labels($arr)
         ->datasets([
             [
@@ -236,68 +305,124 @@ class HomeController extends Controller
             ],
          
         ])
-        ->options([]);
-
-        $chartjs_porcentajeplan = app()->chartjs
-        ->name('plan')
-        ->type('bar')
-        //->size(['width' => 400, 'height' => 200])
-        //->labels(['Vya Renda', 'Originarios', 'V. Economicas', 'Fonavis', 'Sembrando', 'Foncoop', 'Focen','Che Tapyi', 'Mej. Vivienda'])
-        //->labels($arr)
-        ->datasets([
-            [
-                "label" => "Viviendas Planificadas",
-                'backgroundColor' => "blue",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [$planif] ,
-            ],
-            [
-                "label" => "Viviendas Culminadas",
-                'backgroundColor' => "red",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [$culmi],
-            ],
-            [
-                "label" => "Viviendas En Ejecución",
-                'backgroundColor' => "grey",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [$eneje],
-            ],
-            [
-                "label" => "Viviendas A Terminar",
-                'backgroundColor' => "yellow",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [$aini],
-            ],
-         
-        ])
+        //->options([]);
         ->optionsRaw("{
             legend: {
-                display:false
+                display:true,
+                position: 'bottom',
+                labels: {
+                    fontColor:  '#000'
+                }
             },
             scales: {
                 xAxes: [{
                     gridLines: {
                         display:false
                     }  
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display:true
+                    }  
                 }]
+            },
+            plugins: {
+                labels: {
+                    render: 'value'
+                },
             }
+        }");
+        
+
+        $chartjs_porcentajeplan = app()->chartjs
+        ->name('plan')
+        ->type('bar')
+        //->size(['width' => 400, 'height' => 200])
+        ->labels(['Total %'])
+        //->labels($arr)
+        ->datasets([
+            [
+                "label" => "Viviendas Planificadas",
+                'backgroundColor' => "blue",
+                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                'data' => [100] ,
+            ],
+            [
+                "label" => "Viviendas Culminadas",
+                'backgroundColor' => "red",
+                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                'data' => [number_format(($culmi*100)/$planif)],
+            ],
+            [
+                "label" => "Viviendas En Ejecución",
+                'backgroundColor' => "grey",
+                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                'data' => [number_format(($eneje*100)/$planif)],
+            ],
+            [
+                "label" => "Viviendas A Terminar",
+                'backgroundColor' => "yellow",
+                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                'data' => [number_format(($aini*100)/$planif)],
+            ],
+         
+        ])
+        ->optionsRaw("{
+            legend: {
+                display:true,
+                position: 'bottom',
+                labels: {
+                    fontColor:  '#000'
+                }
+            },
+
+            plugins: {
+                labels: {
+                    render: function (args) {
+                        // args will be something like:
+                        // { label: 'Label', value: 123, percentage: 50, index: 0, dataset: {...} }
+                        return args.value + '%';
+                    
+                        // return object if it is image
+                        // return { src: 'image.png', width: 16, height: 16 };
+                      }
+                },
+            },
+
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display:false
+                    }  
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display:true
+                    },
+                    ticks: {
+                        beginAtZero: true,
+                        steps: 10,
+                        stepValue: 5,
+                        max: 120
+                    } 
+                }]
+            },
         }");
 
         $chartjs_viviendas_eje = app()->chartjs
@@ -321,8 +446,22 @@ class HomeController extends Controller
                            $tabger01->last()->TabGer01Ava25],
             ],
         ])
-        //->optionsRaw([]);
-        ->options([]);
+        ->optionsRaw("{
+            legend: {
+                display:true,
+                position: 'bottom',
+                labels: {
+                    fontColor:  '#000'
+                }
+            },
+
+            plugins: {
+                labels: {
+                    render: 'value'
+                },
+            },
+        }");
+        //->options([]);
 
         $chartjs_porcejefinac = app()->chartjs
         ->name('abcdef')
@@ -353,7 +492,29 @@ class HomeController extends Controller
             ],
          
         ])
-        ->options([]);
+        ->optionsRaw("{
+            legend: {
+                display:true,
+                position: 'bottom',
+                labels: {
+                    fontColor:  '#000'
+                }
+            },
+
+            plugins: {
+                labels: {
+                    render: function (args) {
+                        // args will be something like:
+                        // { label: 'Label', value: 123, percentage: 50, index: 0, dataset: {...} }
+                        return args.value + '%';
+                    
+                        // return object if it is image
+                        // return { src: 'image.png', width: 16, height: 16 };
+                      }
+                },
+            },
+        }");
+        //->options([]);
 
         $chartjsdptos= app()->chartjs
         ->name('dptos')
@@ -405,7 +566,23 @@ class HomeController extends Controller
             ],
          
         ])
-        ->options([]);
+        ->optionsRaw("{
+            legend: {
+                display:true,
+                position: 'bottom',
+                labels: {
+                    fontColor:  '#000'
+                }
+            },
+
+            plugins: {
+                labels: {
+                    render: 'value',
+                    fontSize: 10,
+                },
+            },
+        }");
+        //->options([]);
         /*->optionsRaw("{
             legend: {
                 display:false
@@ -472,6 +649,18 @@ class HomeController extends Controller
         ])
         //->options([]);
         ->optionsRaw("{
+            plugins: {
+                labels: {
+                    render: function (args) {
+                        // args will be something like:
+                        // { label: 'Label', value: 123, percentage: 50, index: 0, dataset: {...} }
+                        return '';
+                    
+                        // return object if it is image
+                        // return { src: 'image.png', width: 16, height: 16 };
+                      }
+                },
+            },
             
             scales: {
             xAxes: [{
