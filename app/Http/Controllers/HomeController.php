@@ -38,6 +38,7 @@ class HomeController extends Controller
         ->orderBy('TabGer01Cod')
         ->get();
         //var_dump($tab04);
+        //print_r($tab04);
         $nombreplan = [];
         $presuplan = [];
         $viviculm2 = [];
@@ -467,7 +468,7 @@ class HomeController extends Controller
         ->name('abcdef')
         ->type('bar')
         //->size(['width' => 400, 'height' => 200])
-        ->labels(['Vya Renda', 'Originarios', 'V. Economicas', 'Fonavis', 'Sembrando', 'Foncoop', 'Focen','Che Tapyi', 'Mej. Vivienda'])
+        ->labels(['Vya Renda', 'Originarios', 'V. Economicas', 'Fonavis', 'Sembrando','FOCEM', 'Che Tapyi'])
         //->labels($nombreplan)
         ->datasets([
             [
@@ -655,13 +656,11 @@ class HomeController extends Controller
                         // args will be something like:
                         // { label: 'Label', value: 123, percentage: 50, index: 0, dataset: {...} }
                         return '';
-                    
                         // return object if it is image
                         // return { src: 'image.png', width: 16, height: 16 };
                       }
                 },
             },
-            
             scales: {
             xAxes: [{
                 stacked: true
