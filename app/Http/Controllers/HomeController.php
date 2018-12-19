@@ -295,7 +295,7 @@ class HomeController extends Controller
                 'data' => [$eneje],
             ],
             [
-                "label" => "Viviendas A Terminar",
+                "label" => "Viviendas A Iniciar",
                 'backgroundColor' => "yellow",
                 'borderColor' => "rgba(38, 185, 154, 0.7)",
                 "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
@@ -373,7 +373,7 @@ class HomeController extends Controller
                 'data' => [number_format(($eneje*100)/$planif)],
             ],
             [
-                "label" => "Viviendas A Terminar",
+                "label" => "Viviendas A Iniciar",
                 'backgroundColor' => "yellow",
                 'borderColor' => "rgba(38, 185, 154, 0.7)",
                 "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
@@ -556,7 +556,7 @@ class HomeController extends Controller
                 'data' => $dptoseje,
             ],
             [
-                "label" => "Viviendas A Terminar",
+                "label" => "Viviendas A Iniciar",
                 'backgroundColor' => "yellow",
                 'borderColor' => "rgba(38, 185, 154, 0.7)",
                 "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
