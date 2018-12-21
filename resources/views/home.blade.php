@@ -3,11 +3,18 @@
 @section('title', 'Tablero Gerencial')
 
 @section('content_header')
-    <h3 class="center"><strong>INFORME DE LA DIRECCIÓN DE INVESTIGACIÓN, EVALUACION Y MONITOREO
-        Informe de Avances de Obras</strong>
-        </h3>
-        <h3 class="center"><strong>Informe N° 31/18 DIEM</strong></h3>
-        <h4 class="center"><strong>Avances de Obras al mes de Octubre del 2018</strong></h4>
+<div class="row">
+        <div class="col-md-4">
+              <img src="{{asset('img/CASTELLANO-Y-GURANI-min-de-la-vivienda.png')}}" class="imagencentro" width="230" height="70">
+        </div>
+        <div class="col-md-4">
+              <img src="{{asset('img/gobierno-nacional.png')}}" class="imagencentro" style="margin-top:5px" width="250" height="60">
+        </div>
+        <div class="col-md-4">
+              <img src="{{asset('img/slogan.png')}}" class="imagencentro" width="220" height="70">
+        </div>
+      </div>
+<h2 class="center"><strong>INFORME GERENCIAL</strong></h2>        
 @stop
 
 @section('content')
@@ -29,6 +36,16 @@
 @endsection
 @section('css')
    <style>
+.border{
+    border-color: black;
+}
+   .imagencentro{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width:100%;
+    max-height:100%;
+   }    
    .center{
        text-align: center;
    }
